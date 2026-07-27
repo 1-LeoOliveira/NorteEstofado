@@ -1,18 +1,3 @@
-export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
-      <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M24 10c-3.5 0-6 2.6-6 6.2 0 2 .9 3.5 2.1 4.9-3.6 1.1-6.1 3.8-6.1 8.4V33c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-3.5c0-4.6-2.5-7.3-6.1-8.4 1.2-1.4 2.1-2.9 2.1-4.9 0-3.6-2.5-6.2-6-6.2Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M17 27.5h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export function WhatsAppIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="currentColor" className={className} aria-hidden="true">

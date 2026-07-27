@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { siteConfig } from "@/lib/site-config";
-import { FacebookIcon, InstagramIcon, LogoMark, TiktokIcon, YoutubeIcon } from "./icons";
+import { FacebookIcon, InstagramIcon, TiktokIcon, YoutubeIcon } from "./icons";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5 text-cream">
-              <LogoMark className="h-8 w-8 text-gold" />
+              <Image src="/img/logo.png" alt="Norte Estofados" width={44} height={44} className="h-11 w-11 rounded-full" />
               <span className="font-display leading-none">
                 <span className="block text-lg font-bold tracking-wide">NORTE</span>
                 <span className="block text-[10px] tracking-[0.3em] text-gold">ESTOFADOS</span>

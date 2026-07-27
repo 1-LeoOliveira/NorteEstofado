@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig, whatsappLink } from "@/lib/site-config";
-import { LogoMark, PhoneIcon } from "./icons";
+import { PhoneIcon } from "./icons";
 
 const links = [
   { href: "/#inicio", label: "Início" },
@@ -21,7 +22,7 @@ export default function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-cream/10 bg-ink/90 backdrop-blur-sm">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
         <Link href="#inicio" className="flex items-center gap-2.5 text-cream">
-          <LogoMark className="h-8 w-8 text-gold" />
+          <Image src="/img/logo.png" alt="Norte Estofados" width={44} height={44} priority className="h-11 w-11 rounded-full" />
           <span className="font-display leading-none">
             <span className="block text-lg font-bold tracking-wide">NORTE</span>
             <span className="block text-[10px] tracking-[0.3em] text-gold">ESTOFADOS</span>
