@@ -59,8 +59,8 @@ export default function NauticalServices() {
 
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-cream/10 bg-charcoal">
             <Image
-              src="https://images.unsplash.com/photo-1684849843504-7919ac9ede9c?auto=format&fit=crop&w=1000&q=80"
-              alt="Banco de popa em couro náutico"
+              src="/img/nautico/foto-2.jpeg"
+              alt="Capota náutica instalada pela Norte Estofados"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 90vw"

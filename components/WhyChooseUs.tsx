@@ -16,8 +16,8 @@ export default function WhyChooseUs() {
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-cream/10 bg-charcoal">
             <Image
-              src="https://images.unsplash.com/photo-1757926331188-cffceee50760?auto=format&fit=crop&w=1000&q=80"
-              alt="Interior de veículo com bancos em couro"
+              src="/img/automotivo/foto-3.jpg"
+              alt="Cabine de caminhão com bancos personalizados pela Norte Estofados"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 90vw"

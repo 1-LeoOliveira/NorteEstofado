@@ -67,8 +67,8 @@ export default function Hero() {
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-cream/10 bg-charcoal shadow-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1636647510477-5ec1593b8be3?auto=format&fit=crop&w=1000&q=80"
-              alt="Banco automotivo revestido em couro vermelho"
+              src="/img/automotivo/foto-2.jpg"
+              alt="Interior automotivo com bancos em couro preto costurados pela Norte Estofados"
               fill
               priority
               className="object-cover"
