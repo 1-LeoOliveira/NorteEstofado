@@ -14,8 +14,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  // TODO: trocar pela URL real assim que o site tiver um domínio (necessário para o link de compartilhamento funcionar corretamente).
-  metadataBase: new URL("https://norteestofados.com.br"),
+  // Atualizar aqui se o site passar a usar um domínio próprio no lugar do subdomínio da Vercel.
+  metadataBase: new URL("https://norteestofado.vercel.app"),
   title: "Norte Estofados | Tapeçaria Automotiva e Náutica Premium",
   description:
     "Estofamento automotivo e náutico de alto padrão: bancos em couro, volante, painéis, forro de teto, cabines e capotas para embarcações. Personalização com acabamento impecável.",
