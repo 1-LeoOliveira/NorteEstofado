@@ -10,7 +10,7 @@
  * Se não for definido, o bloco de prazo e o contador simplesmente não aparecem
  * (o aviso das 24 horas continua no texto principal).
  */
-export const PRAZO_FINAL = process.env.SITE_SUSPENSO_PRAZO ?? "";
+export const PRAZO_FINAL = process.env.SITE_SUSPENSO_PRAZO ?? "2026-11-18T00:30:00-03:00";
 
 /** Contato opcional para regularização (ex.: "https://wa.me/55119XXXXXXXX"). */
 const CONTATO_URL = process.env.SITE_SUSPENSO_CONTATO_URL ?? "";
@@ -120,7 +120,27 @@ export function suspendedPageHtml(): string {
   }
   .prazo-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7e7a73; margin: 0 0 8px; }
   .prazo-data { font-size: 16px; color: var(--cream); margin: 0; font-weight: 600; }
-  #contador { font-size: 15px; color: var(--gold-light); margin: 10px 0 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .timer { display: flex; align-items: flex-start; justify-content: center; gap: 8px; margin: 4px 0 18px; }
+  .timer .unit {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    min-width: 78px;
+    padding: 12px 6px 10px;
+    border: 1px solid rgba(201,162,39,0.28);
+    border-radius: 12px;
+    background: rgba(201,162,39,0.07);
+  }
+  .timer .num {
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1;
+    font-weight: 800;
+    color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+  .timer .lbl { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a857d; }
+  .timer .sep { font-size: 26px; font-weight: 700; color: rgba(201,162,39,0.45); padding-top: 14px; }
+  .timer-msg { color: var(--danger); font-weight: 700; font-size: 16px; margin: 4px 0 16px; }
+  .timer[hidden], .timer-msg[hidden] { display: none; }
   .btn {
     display: inline-block;
     margin-top: 26px;
@@ -154,9 +174,16 @@ export function suspendedPageHtml(): string {
         <p>Se o pagamento não for realizado nas próximas 24 horas, o site será descontinuado em definitivo e não será possível recuperá-lo.</p>
       </div>
       ${prazoFormatado ? `<div class="prazo">
-        <p class="prazo-label">Prazo final para regularização</p>
-        <p class="prazo-data">${prazoFormatado} (horário de Brasília)</p>
-        <p id="contador" data-prazo="${PRAZO_FINAL}"></p>
+        <p class="prazo-label">Tempo restante para regularização</p>
+        <div class="timer" id="timer" data-prazo="${PRAZO_FINAL}" role="timer">
+          <div class="unit"><span class="num" id="t-h">--</span><span class="lbl">horas</span></div>
+          <span class="sep">:</span>
+          <div class="unit"><span class="num" id="t-m">--</span><span class="lbl">min</span></div>
+          <span class="sep">:</span>
+          <div class="unit"><span class="num" id="t-s">--</span><span class="lbl">seg</span></div>
+        </div>
+        <p class="timer-msg" id="timer-msg" hidden>Prazo encerrado.</p>
+        <p class="prazo-data">Prazo final: ${prazoFormatado} (horário de Brasília)</p>
       </div>` : ""}
       ${botaoContato}
       <p class="foot">Após a confirmação do pagamento, o site é reativado imediatamente.</p>
@@ -164,23 +191,29 @@ export function suspendedPageHtml(): string {
   </main>
   <script>
     (function () {
-      var el = document.getElementById('contador');
-      if (!el) return;
-      var prazo = new Date(el.getAttribute('data-prazo')).getTime();
+      var box = document.getElementById('timer');
+      if (!box) return;
+      var prazo = new Date(box.getAttribute('data-prazo')).getTime();
       if (isNaN(prazo)) return;
+      var msg = document.getElementById('timer-msg');
+      var eh = document.getElementById('t-h');
+      var em = document.getElementById('t-m');
+      var es = document.getElementById('t-s');
+      var pad = function (n) { return ('0' + n).slice(-2); };
+      var id = setInterval(tick, 1000);
       function tick() {
         var resta = prazo - Date.now();
         if (resta <= 0) {
-          el.textContent = 'Prazo encerrado.';
+          clearInterval(id);
+          box.hidden = true;
+          if (msg) msg.hidden = false;
           return;
         }
-        var h = Math.floor(resta / 3600000);
-        var m = Math.floor((resta % 3600000) / 60000);
-        var s = Math.floor((resta % 60000) / 1000);
-        el.textContent = 'Tempo restante: ' + h + 'h ' + ('0' + m).slice(-2) + 'min ' + ('0' + s).slice(-2) + 's';
+        eh.textContent = pad(Math.floor(resta / 3600000));
+        em.textContent = pad(Math.floor((resta % 3600000) / 60000));
+        es.textContent = pad(Math.floor((resta % 60000) / 1000));
       }
       tick();
-      setInterval(tick, 1000);
     })();
   </script>
 </body>
